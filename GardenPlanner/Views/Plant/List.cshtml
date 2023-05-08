@@ -1,0 +1,55 @@
+﻿@model List<ListPlant>
+@{
+    ViewData["Title"] = "Alla plantor";
+
+}
+<h3 class="display-3 text-center">Alla växter</h3>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Namn</th>
+                <th>Månad</th>
+                <th>Ätbar</th>
+                <th>Blomma</th>
+                <th>Odlingsplats</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <form asp-controller="Plant" asp-route-id="@item.Id" asp-action="Delete">
+                <tr>
+
+                    <td>
+                            @item.Name
+                    </td>
+                    <td>
+                            @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames[item.Month - 1].ToCapitalized()
+                    </td>
+                    <td>
+                            @(item.Eatable ? "Ja" : "Nej")
+                    </td>
+                    <td>
+                            @(item.Decorative ? "Ja" : "Nej")
+                    </td>
+                    <td>
+                            @(item.Greenhouse ? "Växthus" : "Utomhus")
+
+                    </td>
+                    <td>
+                        <a class="btn" asp-controller="Plant" asp-route-id="@item.Id" asp-action="Edit">Ändra</a>
+                    </td>
+                    <td>
+                        <button class="btn" type="submit">Ta bort</button>
+                    </td>
+                </tr>
+                </form>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,44 @@
+﻿@model MonthList
+@{
+    ViewData["Title"] = "Alla plantor";
+   
+}
+<h3 class ="display-3 text-center">Odla nu</h3>
+<h5 class="display-5 text-center">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames[Model.Month - 1].ToCapitalized()</h5>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Namn</th>
+                
+                <th>Ätbar</th>
+                <th>Blomma</th>
+                <th>Odlingsplats</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Plants)
+            {
+                <tr>
+                    
+                    <td>
+                            @item.Name
+                    </td>
+                    
+                    <td>
+                            @(item.Eatable ? "Ja" : "Nej")
+                    </td>
+                    <td>
+                             @(item.Decorative ? "Ja" : "Nej")
+                    </td>
+                    <td>
+                        @(item.Greenhouse ? "Växthus" : "Utomhus")
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
