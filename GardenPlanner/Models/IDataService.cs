@@ -7,6 +7,7 @@ namespace GardenPlanner.Models
         void Add(CreatePlant plant);
         void DeletePlant(int id);
         List<ListPlant> GetAll();
+        List<ListPlant> GetByFilter(int month, bool eatable, bool decorative, bool greenhouse);
         List<ListPlant> GetByMonth(int month);
 
         Plant GetPlant(int id);

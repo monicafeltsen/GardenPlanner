@@ -33,6 +33,12 @@ namespace GardenPlanner.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpGet("Search")]
+        public IActionResult Search(int month, bool eatable, bool decorative, bool greenhouse)
+        {
+            List<ListPlant> model = dataService.GetByFilter(month, eatable, decorative, greenhouse);
+            return View(nameof (List), model);
+        }
         [HttpGet("")]
         public IActionResult List()
         {

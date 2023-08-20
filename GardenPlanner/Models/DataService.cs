@@ -27,7 +27,8 @@ namespace GardenPlanner.Models
 
         public List<ListPlant> GetAll()
         {
-            return context.Plants.Select(p => new ListPlant
+            return context.Plants
+                .Select(p => new ListPlant
             {
                 Decorative= p.Decorative,
                 Greenhouse= p.Greenhouse,
@@ -36,6 +37,21 @@ namespace GardenPlanner.Models
                 Name= p.Name,
                 Id= p.Id                     
             }).ToList();
+        }
+
+        public List<ListPlant> GetByFilter(int month, bool eatable, bool decorative, bool greenhouse)
+        {
+            return context.Plants
+                .Where(p => (month == 0 || month == p.Month) && (eatable == false || p.Eatable == eatable) && (decorative == false  || p.Decorative == decorative) && (greenhouse == false || p.Greenhouse == greenhouse))
+                .Select(p => new ListPlant
+                {
+                    Decorative = p.Decorative,
+                    Greenhouse = p.Greenhouse,
+                    Month = p.Month,
+                    Eatable = p.Eatable,
+                    Name = p.Name,
+                    Id = p.Id
+                }).ToList();
         }
 
         public List<ListPlant> GetByMonth(int month)
